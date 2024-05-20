@@ -41,7 +41,9 @@ const connect = async() => {
         console.log("MongoDB database connection failed");
     }
 }
-
+app.het("/".(req,res)=>{
+    res.json("Hello");
+});
 // middleware
 app.use(express.json());
 app.use(cors(corsOptions));
