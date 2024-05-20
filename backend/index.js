@@ -41,7 +41,7 @@ const connect = async() => {
         console.log("MongoDB database connection failed");
     }
 }
-app.het("/".(req,res)=>{
+app.get("/",(req,res)=>{
     res.json("Hello");
 });
 // middleware
