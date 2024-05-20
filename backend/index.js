@@ -31,7 +31,7 @@ app.use(cors(
 mongoose.set('strictQuery', false);
 const connect = async() => {
     try{
-        await mongoose.connect(process.env.MONGO_URL,{
+        await mongoose.connect("mongodb+srv://rahulsingh1:Singh@1@database.3ji99es.mongodb.net/website?retryWrites=true&w=majority&appName=Database",{
             useNewUrlParser:true,
             useUnifiedTopology:true,
         });
