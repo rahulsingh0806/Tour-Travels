@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { url } from "./../utils/config";
 
-const useFetch = (url) => {
+const useFetch = () => {
     const [data,setData] = useState([])
     const [error,setError] = useState(null)
     const [loading,setLoading] = useState(false)
@@ -26,7 +27,7 @@ const useFetch = (url) => {
             }
         };
         fetchData();
-    },[url])
+    },[url]);
 
     return{
         data,
