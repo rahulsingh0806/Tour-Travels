@@ -1,4 +1,3 @@
-
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -13,25 +12,20 @@ import bookingRoute from './routes/bookings.js';
 
 dotenv.config();
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 8000;
 const corsOptions = {
-    origin: true,
+    origin: "",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }
-
-app.use(cors(
-    {
-        origin:["https://tour-travels-frontend.vercel.app"],
-        methods: ["POST","GET"]
-        // credentials :true
-    }
-));
 
 // database connection
 mongoose.set('strictQuery', false);
 const connect = async() => {
     try{
-        await mongoose.connect("mongodb+srv://rahulsingh1:Singh@1@database.3ji99es.mongodb.net/website?retryWrites=true&w=majority&appName=Database",{
+        
+        await mongoose.connect(process.env.MONGO_URL,{
             useNewUrlParser:true,
             useUnifiedTopology:true,
         });
@@ -41,9 +35,7 @@ const connect = async() => {
         console.log("MongoDB database connection failed");
     }
 }
-app.get("/",(req,res)=>{
-    res.json("Hello");
-});
+
 // middleware
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -54,7 +46,9 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/review", reviewRoute);
 app.use("/api/v1/booking", bookingRoute);
 
-
+app.get("/",(req,res)=>{
+    res.send("This is the Backend");
+})
 app.listen(port, () => {
     connect();
     console.log('Server listening on port', port);
